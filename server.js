@@ -17,6 +17,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Support '/api/*' by stripping the prefix so existing handlers (e.g. '/upload-csv') work both locally and on Vercel
+app.use('/api', (req, res, next) => {
+  req.url = req.url.replace(/^\/api/, '') || '/';
+  next();
+});
+
 // Supabase config
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
