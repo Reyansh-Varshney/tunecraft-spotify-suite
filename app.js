@@ -214,6 +214,11 @@ function spinWheel() {
   }, 4500);
 }
 
+// Generate a random 4-digit unique ID (string) for checkout
+function generateShortId() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
 // Handle form submission
 async function handleFormSubmission(event) {
   event.preventDefault();
@@ -246,56 +251,11 @@ async function handleFormSubmission(event) {
     return;
   }
   
-  // Generate transaction ID
-  transactionId = generateTransactionId();
+  // Generate short transaction ID
+  transactionId = 'TC-' + generateShortId();
   const finalAmount = appData.product.originalPrice - selectedDiscount;
   
-  // Store transaction (in real app, this would be sent to backend)
-  const transactionData = {
-    transactionId: transactionId,
-    userName: nameValue,
-    userContact: contactValue,
-    originalPrice: appData.product.originalPrice,
-    discount: selectedDiscount,
-    finalAmount: finalAmount,
-    timestamp: new Date().toISOString(),
-    filename: (document.getElementById('csvReadFilename') || {}).value || null
-  };
-  
-  // Store in localStorage for demo purposes
-  try {
-    const transactions = JSON.parse(localStorage.getItem('tunecraft_transactions') || '[]');
-    transactions.push(transactionData);
-    localStorage.setItem('tunecraft_transactions', JSON.stringify(transactions));
-  } catch (e) {
-    console.log('LocalStorage not available');
-  }
-
-  // Send transaction to backend to persist in Supabase
-  (async () => {
-    try {
-      const resp = await fetch('/transactions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(transactionData)
-      });
-      const saveStatusEl = document.getElementById('transactionSaveStatus');
-      if (!resp.ok) {
-        const text = await resp.text();
-        console.error('Failed to save transaction to server:', text);
-        if (saveStatusEl) saveStatusEl.textContent = 'Failed to save transaction on server';
-      } else {
-        console.log('Transaction saved to server');
-        if (saveStatusEl) saveStatusEl.textContent = 'Transaction saved on server';
-      }
-    } catch (err) {
-      console.error('Error sending transaction to server:', err);
-      const saveStatusEl = document.getElementById('transactionSaveStatus');
-      if (saveStatusEl) saveStatusEl.textContent = 'Error saving transaction (offline)';
-    }
-  })();
-  
-  // Show payment success
+  // Show payment success with the short ID
   showPaymentSuccess(finalAmount);
 }
 
@@ -510,70 +470,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   console.log('TuneCraft application initialized successfully!');
-});
-
-// CSV test handlers
-document.addEventListener('DOMContentLoaded', () => {
-  // CSV upload form handler
-  const csvUploadForm = document.getElementById('csvUploadForm');
-  const csvFileInput = document.getElementById('csvFileInput');
-  const csvStatus = document.getElementById('csvStatus');
-  const csvReadBtn = document.getElementById('csvReadBtn');
-  const csvReadFilename = document.getElementById('csvReadFilename');
-  const csvDownloadBtn = document.getElementById('csvDownloadBtn');
-
-  if (csvUploadForm) {
-    csvUploadForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (!csvFileInput || !csvFileInput.files.length) {
-        csvStatus.textContent = 'Please select a CSV file.';
-        return;
-      }
-      const formData = new FormData();
-      formData.append('csvfile', csvFileInput.files[0]);
-      csvStatus.textContent = 'Uploading...';
-      try {
-        const resp = await fetch('/upload-csv', { method: 'POST', body: formData });
-        if (!resp.ok) throw new Error(await resp.text());
-        const data = await resp.json();
-        csvStatus.textContent = `Uploaded as ${data.filename}`;
-      } catch (err) {
-        csvStatus.textContent = 'Upload error: ' + err.message;
-      }
-    });
-  }
-
-  if (csvReadBtn) {
-    csvReadBtn.addEventListener('click', async () => {
-      const fname = csvReadFilename.value.trim();
-      if (!fname) {
-        csvStatus.textContent = 'Enter filename to read (e.g., my.csv)';
-        return;
-      }
-      csvStatus.textContent = 'Reading...';
-      try {
-        const res = await fetch(`/read-csv/${encodeURIComponent(fname)}`);
-        if (!res.ok) throw new Error(await res.text());
-        const rows = await res.json();
-        csvStatus.textContent = `Rows: ${rows.length} — see console`; 
-        console.log('CSV rows:', rows);
-      } catch (err) {
-        csvStatus.textContent = 'Read error: ' + err.message;
-      }
-    });
-  }
-
-  if (csvDownloadBtn) {
-    csvDownloadBtn.addEventListener('click', () => {
-      const fname = csvReadFilename.value.trim();
-      if (!fname) {
-        csvStatus.textContent = 'Enter filename to download';
-        return;
-      }
-      window.location.href = `/download-csv/${encodeURIComponent(fname)}`;
-    });
-  }
-
 });
 
 // Initialize responsive wheel on load
