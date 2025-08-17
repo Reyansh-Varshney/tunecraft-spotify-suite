@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuneCraft - Transform Your Spotify Experience</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title gradient-text">TuneCraft</h1>
+                <p class="hero-subtitle">Transform Your Spotify Experience - Next-Gen Customization for Music Lovers</p>
+                <p class="hero-tagline">Desktop-Only Power Suite</p>
+                <button class="btn btn--primary btn--lg cta-button" onclick="scrollToSection('spin-section')">Buy Now</button>
+            </div>
+        </div>
+        <div class="hero-particles"></div>
+        <div class="hero-wave"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title gradient-text">Powerful Features</h2>
+            <div class="features-grid">
+                <!-- Dynamic Audio Visualizer -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <div class="visualizer-bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                    <h3>Dynamic, Color-Adapting Audio Visualizer</h3>
+                    <p>Experience music with visualizers that adapt colors to your album art in real-time</p>
+                </div>
+
+                <!-- Better Lyrics Interface -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <div class="lyrics-icon">♪</div>
+                    </div>
+                    <h3>Better Lyrics Interface & Collection</h3>
+                    <p>Enhanced lyrics display with synchronized highlighting and extensive lyric database</p>
+                    <div class="lyrics-demo">
+                        <div class="lyric-line active">♪ Transform your music experience</div>
+                        <div class="lyric-line">With real-time synchronized lyrics</div>
+                    </div>
+                </div>
+
+                <!-- YouTube Integration -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <div class="youtube-icon">▶</div>
+                    </div>
+                    <h3>YouTube Integration</h3>
+                    <p>Seamlessly watch music videos within your Spotify interface</p>
+                    <div class="video-demo">
+                        <div class="video-placeholder">
+                            <div class="play-button">▶</div>
+                            <span>Music Video Demo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sleek Interface -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <div class="interface-icon">◈</div>
+                    </div>
+                    <h3>Sleek, Modern Interface</h3>
+                    <p>Completely redesigned UI with glassmorphism effects and premium aesthetics</p>
+                    <div class="interface-preview">
+                        <div class="mini-window"></div>
+                        <div class="mini-controls">
+                            <div class="mini-btn"></div>
+                            <div class="mini-btn"></div>
+                            <div class="mini-btn"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intuitive Controls -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <div class="controls-icon">⚙</div>
+                    </div>
+                    <h3>Intuitive Controls</h3>
+                    <p>Streamlined playback controls with haptic feedback and smooth interactions</p>
+                    <div class="controls-demo">
+                        <div class="slider">
+                            <div class="slider-track"></div>
+                            <div class="slider-thumb"></div>
+                        </div>
+                        <div class="control-buttons">
+                            <div class="control-btn">⏮</div>
+                            <div class="control-btn">⏸</div>
+                            <div class="control-btn">⏭</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Visuals -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <div class="visuals-icon">✦</div>
+                    </div>
+                    <h3>Enhanced Visuals</h3>
+                    <p>Premium album art displays and now-playing visualizations</p>
+                    <div class="album-demo">
+                        <div class="album-art"></div>
+                        <div class="glow-effect"></div>
+                    </div>
+                </div>
+
+                <!-- Effortless Installation -->
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <div class="install-icon">⚡</div>
+                    </div>
+                    <h3>Effortless Installation</h3>
+                    <p>Simple 3-step setup process - download, install, customize</p>
+                    <div class="install-steps">
+                        <div class="step">1. Download</div>
+                        <div class="step">2. Install</div>
+                        <div class="step">3. Customize</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spin the Wheel Section -->
+    <section id="spin-section" class="spin-section">
+        <div class="container">
+            <h2 class="section-title gradient-text">Spin the Wheel for Discounts!</h2>
+
+            <!-- CSV Test Upload Form (for local testing) -->
+            <div class="csv-test" style="margin:16px 0;padding:12px;border:1px dashed var(--color-border);border-radius:8px;background:var(--color-surface);">
+                <h4 style="margin:0 0 8px 0;">CSV Storage Test</h4>
+                <form id="csvUploadForm">
+                    <input type="file" id="csvFileInput" name="csvfile" accept=".csv" />
+                    <button type="submit" class="btn btn--primary">Upload CSV</button>
+                </form>
+                <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+                    <input type="text" id="csvReadFilename" placeholder="filename.csv" style="padding:6px;border-radius:6px;border:1px solid var(--color-border);" />
+                    <button id="csvReadBtn" class="btn btn--secondary">Read CSV</button>
+                    <button id="csvDownloadBtn" class="btn btn--outline">Download CSV</button>
+                </div>
+                <div id="csvStatus" style="margin-top:8px;color:var(--color-text-secondary);"></div>
+            </div>
+
+            <div class="spin-container glass-card">
+                <div class="wheel-container">
+                    <div class="wheel" id="wheel">
+                        <div class="wheel-segment" data-value="5" style="--rotation: 0deg; --color: #FF6B6B;">₹5 OFF</div>
+                        <div class="wheel-segment" data-value="10" style="--rotation: 51.43deg; --color: #4ECDC4;">₹10 OFF</div>
+                        <div class="wheel-segment" data-value="25" style="--rotation: 102.86deg; --color: #45B7D1;">₹25 OFF</div>
+                        <div class="wheel-segment" data-value="30" style="--rotation: 154.29deg; --color: #96CEB4;">₹30 OFF</div>
+                        <div class="wheel-segment" data-value="40" style="--rotation: 205.72deg; --color: #FFEAA7;">₹40 OFF</div>
+                        <div class="wheel-segment" data-value="50" style="--rotation: 257.15deg; --color: #DDA0DD;">₹50 OFF</div>
+                        <div class="wheel-segment" data-value="100" style="--rotation: 308.58deg; --color: #FFB347;">₹100 OFF</div>
+                    </div>
+                    <div class="wheel-pointer"></div>
+                </div>
+                <button class="btn btn--primary spin-btn" id="spinBtn">Spin the Wheel!</button>
+                
+                <div class="discount-result hidden" id="discountResult">
+                    <h3>Congratulations! 🎉</h3>
+                    <p class="discount-amount"></p>
+                </div>
+
+                <div class="payment-form hidden" id="paymentForm">
+                    <h3>Complete Your Purchase</h3>
+                    <div class="price-summary">
+                        <div class="original-price">Original Price: ₹269</div>
+                        <div class="discount-applied">Discount: -₹<span id="discountValue">0</span></div>
+                        <div class="final-price">Final Price: ₹<span id="finalPrice">199</span></div>
+                    </div>
+                    
+                    <form id="userForm">
+                        <div class="form-group">
+                            <label class="form-label" for="userName">Full Name *</label>
+                            <input type="text" id="userName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="userContact">Phone/Email *</label>
+                            <input type="text" id="userContact" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full-width">Generate Payment Link</button>
+                    </form>
+                </div>
+
+                <div class="payment-success hidden" id="paymentSuccess">
+                    <h3>Payment Link Generated! 🎉</h3>
+                    <div class="transaction-details">
+                        <p><strong>Transaction ID:</strong> <span id="transactionId"></span></p>
+                        <p><strong>Amount:</strong> ₹<span id="paymentAmount"></span></p>
+                    </div>
+                    <p id="transactionSaveStatus" style="margin-top:8px;color:var(--color-text-secondary);"></p>
+                    <a href="#" id="upiLink" class="btn btn--primary btn--lg payment-link">Pay with UPI</a>
+                    <p class="payment-note">Click the button above to open your UPI payment app</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team & Event Section -->
+    <section id="team" class="team-section">
+        <div class="container">
+            <h2 class="section-title gradient-text">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-card glass-card">
+                    <div class="team-avatar">👨‍💻</div>
+                    <h3>Reyansh Varshney</h3>
+                    <p class="team-role">Team Lead</p>
+                </div>
+                <div class="team-card glass-card">
+                    <div class="team-avatar">👨‍🎨</div>
+                    <h3>Aagam Jain</h3>
+                    <p class="team-role">Developer</p>
+                </div>
+            </div>
+            
+            <div class="event-card glass-card">
+                <h3>Visit Our Stall!</h3>
+                <div class="event-details">
+                    <p><strong>📅 Date:</strong> 23rd August 2025</p>
+                    <p><strong>📍 Venue:</strong> Basava International School, Sec-23 Dwarka</p>
+                    <p class="event-highlight">Visit our stall for exclusive offers and live demos!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#" target="_blank" class="social-link">📷</a>
+                    <a href="#" target="_blank" class="social-link">🐦</a>
+                    <a href="#" target="_blank" class="social-link">💻</a>
+                </div>
+                <p class="footer-text">© 2025 TuneCraft. All rights reserved.</p>
+                <p class="footer-love">Made with ❤️ for music lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
